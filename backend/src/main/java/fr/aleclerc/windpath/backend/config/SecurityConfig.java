@@ -1,15 +1,9 @@
 package fr.aleclerc.windpath.backend.config;
 
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
-import org.springframework.security.config.web.server.ServerHttpSecurity;
-import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
-import org.springframework.security.web.server.SecurityWebFilterChain;
 
 
 @EnableWebSecurity
@@ -21,6 +15,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()//
                 .anyRequest()//
+//                .permitAll()//
                 .authenticated()//
                 .and()//
                 .oauth2Login()//
@@ -30,11 +25,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         ;
 
     }
-
-//    @Bean
-//    public InMemoryClientRegistrationRepository inMemoryClientRegistrationRepository(){
-//        return new InMemoryClientRegistrationRepository();
-//    }
-
-
 }

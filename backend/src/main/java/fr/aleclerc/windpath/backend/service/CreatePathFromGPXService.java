@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.adapter.rxjava.RxJava2Adapter;
 import reactor.core.publisher.Flux;
 
-import javax.xml.bind.JAXBException;
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
@@ -34,9 +33,8 @@ public class CreatePathFromGPXService {
 
 
     @PostMapping(value = "/service/gpx", consumes = "application/xml", produces = "application/xml")
-    public Completable createPath(@RequestBody Flux<Gpx> gpx) {
-        return RxJava2Adapter.fluxToObservable(gpx)//
-                .flatMap(this::createTrackCommand)//
+    public Completable createPath(@RequestBody Gpx gpx) {
+        return this.createTrackCommand(gpx)//
                 .flatMapCompletable(commandSequencer::publish);
     }
 
