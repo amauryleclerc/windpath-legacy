@@ -1,32 +1,32 @@
-package fr.aleclerc.windpath.backend.command.sequencer;
+package fr.aleclerc.windpath.cqrs.command.sequencer;
 
-import fr.aleclerc.windpath.backend.bus.IEventPublisher;
-import fr.aleclerc.windpath.backend.command.ACommand;
-import fr.aleclerc.windpath.backend.command.handler.ICommandHandler;
-import fr.aleclerc.windpath.backend.event.AEvent;
+import fr.aleclerc.windpath.cqrs.command.ICommand;
+import fr.aleclerc.windpath.cqrs.command.ICommandHandler;
+import fr.aleclerc.windpath.cqrs.command.ICommandSequencer;
+import fr.aleclerc.windpath.cqrs.event.IEvent;
+import fr.aleclerc.windpath.cqrs.event.IEventPublisher;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
 import io.reactivex.subjects.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.GenericTypeResolver;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.Collection;
 
-@Service
+
 public class CommandSequencer implements ICommandSequencer {
+
 
     private final static Logger LOGGER = LoggerFactory.getLogger(CommandSequencer.class);
     private final IEventPublisher publisher;
-    private final Collection<ICommandHandler<? extends ACommand>> handlers;
-    private final Subject<ACommand> commandSubject = PublishSubject.<ACommand>create().toSerialized();
+    private final Collection<ICommandHandler<? extends ICommand>> handlers;
+    private final Subject<ICommand> commandSubject = PublishSubject.<ICommand>create().toSerialized();
 
-    @Autowired
-    public CommandSequencer(final Collection<ICommandHandler<? extends ACommand>> handlers, final IEventPublisher publisher) {
+
+    public CommandSequencer(final Collection<ICommandHandler<? extends ICommand>> handlers, final IEventPublisher publisher) {
         this.handlers = handlers;
         this.publisher = publisher;
 
@@ -44,7 +44,7 @@ public class CommandSequencer implements ICommandSequencer {
 
 
     @SuppressWarnings("unchecked")
-    private <T extends ACommand> Observable<AEvent> apply(ICommandHandler<? extends ACommand> handler, T command) {
+    private <T extends ICommand> Observable<IEvent> apply(ICommandHandler<? extends ICommand> handler, T command) {
         Class<?> find = GenericTypeResolver.resolveTypeArgument(handler.getClass(), ICommandHandler.class);
         if (command.getClass().equals(find)) {
             return ((ICommandHandler<T>) handler).handle(command);
@@ -56,9 +56,7 @@ public class CommandSequencer implements ICommandSequencer {
 
 
     @Override
-    public Completable publish(ACommand command) {
+    public Completable publish(ICommand command) {
         return Completable.fromAction(() -> commandSubject.onNext(command));
     }
-
-
 }
