@@ -47,12 +47,6 @@ public class InjectConfig {
         return new WebSocketHandlerAdapter();
     }
 
-//    @Bean
-//    public WebSocketService webSocketService() {
-//        TomcatRequestUpgradeStrategy strategy = new TomcatRequestUpgradeStrategy();
-//        strategy.setMaxSessionIdleTimeout(0L);
-//        return new HandshakeWebSocketService(strategy);
-//    }
 
     @Bean
     @Autowired
