@@ -1,0 +1,36 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1 *ngIf="name" >
+    {{ name }}
+    <img *ngIf="img" [src]="img" />
+  </h1>
+  </div>
+<ul>
+  <li>
+    <h2>
+      <a href="http://localhost:4200/oauth2/authorization/google">Login with google</a>
+    </h2>
+  </li>
+  <li>
+    <h2>
+      <a href="http://localhost:4200/logout">Logout</a>
+    </h2>
+  </li>
+  <li>
+    <h2>
+      <button (click)="test()">Test</button>
+    </h2>
+  </li>
+  <li>
+    <h2>
+      <button (click)="user()">User</button>
+    </h2>
+  </li>
+</ul>
+<span  class="btn btn-primary btn-file ">
+    GPX <input type="file"  (change)="gpx($event)">
+</span >
+<p *ngFor="let track of tracks" >
+{{track}}
+
+</p>

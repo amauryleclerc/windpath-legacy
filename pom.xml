@@ -10,6 +10,7 @@
         <module>network</module>
         <module>gpx</module>
         <module>backend</module>
+        <module>frontend</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -28,8 +29,8 @@
 
         <!-- plugins version -->
         <frontend.plugin.version>1.6</frontend.plugin.version>
-        <node.version>v6.11.3</node.version>
-        <npm.version>3.10.10</npm.version>
+        <node.version>v8.9.3</node.version>
+        <npm.version>5.6.0</npm.version>
         <release.plugin.version>2.5.3</release.plugin.version>
         <compiler.plugin.version>3.7.0</compiler.plugin.version>
         <resources.plugin.version>3.0.2</resources.plugin.version>

@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -53,7 +55,7 @@ public class CreatePathFromGPXService {
         double lat = trkpt.getLat().doubleValue();
         double lon = trkpt.getLon().doubleValue();
         double ele = trkpt.getEle().doubleValue();
-        double speed = trkpt.getSpeed().doubleValue();
+        double speed = Optional.ofNullable(trkpt.getSpeed()).map(BigDecimal::doubleValue).orElse(0D);
         Instant time = Instant.ofEpochMilli(trkpt.getTime().toGregorianCalendar().getTimeInMillis());
         return new Point(lat, lon, ele, speed, time);
 
