@@ -1,8 +1,9 @@
 package fr.aleclerc.windpath.backend.config;
 
 
-import fr.aleclerc.windpath.backend.handler.JsonWebSocketHandler;
+import fr.aleclerc.windpath.backend.WindpathConstants;
 import fr.aleclerc.windpath.backend.projection.ITrackEventStream;
+import fr.aleclerc.windpath.network.handler.JsonWebSocketHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
@@ -22,7 +23,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(new JsonWebSocketHandler<>(trackEventStream::getStream), "/projection");
+        registry.addHandler(new JsonWebSocketHandler<>(trackEventStream::getStream), WindpathConstants.TRACK_PROJETION_STREAM_PATH);
     }
 
 

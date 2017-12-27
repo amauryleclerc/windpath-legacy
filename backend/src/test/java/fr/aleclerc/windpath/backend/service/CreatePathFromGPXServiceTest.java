@@ -1,7 +1,7 @@
 package fr.aleclerc.windpath.backend.service;
 
-import fr.aleclerc.windpath.backend.pojo.gpx.Gpx;
 import fr.aleclerc.windpath.cqrs.command.ICommandSequencer;
+import fr.aleclerc.windpath.gpx.Gpx;
 import io.reactivex.Completable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,6 +20,6 @@ public class CreatePathFromGPXServiceTest {
 
     @Test
     public void test() {
-       // service.createPath(new Gpx()).test().assertComplete();
+        service.createPath(new Gpx()).test().assertComplete();
     }
 }

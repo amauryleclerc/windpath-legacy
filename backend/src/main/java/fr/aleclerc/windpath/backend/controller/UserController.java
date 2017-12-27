@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
-//@RestController
-//public class UserController {
-//
-//    @GetMapping("/user")
-//    public Map<String, Object> getUser(@AuthenticationPrincipal OAuth2User user) {
-//        return user.getAttributes();
-//    }
-//}
+@RestController
+public class UserController {
+
+    @GetMapping("/user")
+    public Map<String, Object> getUser(@AuthenticationPrincipal OAuth2User user) {
+        return user.getAttributes();
+    }
+}

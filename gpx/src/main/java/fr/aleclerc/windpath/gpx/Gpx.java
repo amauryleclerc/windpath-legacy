@@ -6,7 +6,7 @@
 //
 
 
-package fr.aleclerc.windpath.backend.pojo.gpx;
+package fr.aleclerc.windpath.gpx;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

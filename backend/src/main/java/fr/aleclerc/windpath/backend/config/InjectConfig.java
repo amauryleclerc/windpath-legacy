@@ -19,26 +19,6 @@ import java.util.Collection;
 public class InjectConfig {
 
 
-//    @Bean
-//    @Autowired
-//    public HandlerMapping webSocketMapping(ITrackEventStream trackEventStream) {
-//        System.err.println("MAPPING");
-//        Map<String, WebSocketHandler> map = new HashMap<>();
-//        map.put("/projection", new JsonWebSocketHandler<>(trackEventStream::getStream));
-//        SimpleUrlHandlerMapping mapping = new SimpleUrlHandlerMapping();
-//        mapping.setOrder(2000);
-//        mapping.setUrlMap(map);
-//        return mapping;
-//    }
-//
-//
-//    @Bean
-//    public WebSocketHandlerAdapter handlerAdapter() {
-//        System.err.println("ADAPTER");
-//        return new WebSocketHandlerAdapter();
-//    }
-
-
     @Bean
     @Autowired
     public EventBus provideEventBus() {

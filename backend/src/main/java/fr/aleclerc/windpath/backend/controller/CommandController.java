@@ -3,6 +3,7 @@ package fr.aleclerc.windpath.backend.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import fr.aleclerc.windpath.backend.WindpathConstants;
 import fr.aleclerc.windpath.backend.command.ACommand;
 import fr.aleclerc.windpath.backend.command.CreateTrackCommand;
 import fr.aleclerc.windpath.backend.pojo.Point;
@@ -27,7 +28,7 @@ public class CommandController {
         this.commandSequencer = commandSequencer;
     }
 
-    @PostMapping("/command")
+    @PostMapping(WindpathConstants.COMMAND_PATH)
     public Completable getUser(@RequestBody ACommand command) {
         return commandSequencer.publish(command);
     }

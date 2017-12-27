@@ -15,10 +15,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()//
                 .anyRequest()//
-//                .permitAll()//
-                .authenticated()//
-                .and()//
-                .oauth2Login()//
+                .permitAll()//
+//                .authenticated()//
+//                .and()//
+//                .oauth2Login()//
                 .and()//
                 .csrf()//
                 .disable()//

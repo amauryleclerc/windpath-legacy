@@ -6,4 +6,4 @@
 //
 
 @javax.xml.bind.annotation.XmlSchema(namespace = "http://www.topografix.com/GPX/1/0", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package fr.aleclerc.windpath.backend.pojo.gpx;
+package fr.aleclerc.windpath.gpx;

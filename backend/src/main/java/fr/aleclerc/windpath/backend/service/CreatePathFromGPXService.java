@@ -1,9 +1,10 @@
 package fr.aleclerc.windpath.backend.service;
 
+import fr.aleclerc.windpath.backend.command.ACommand;
 import fr.aleclerc.windpath.backend.command.CreateTrackCommand;
 import fr.aleclerc.windpath.backend.pojo.Point;
-import fr.aleclerc.windpath.backend.pojo.gpx.Gpx;
 import fr.aleclerc.windpath.cqrs.command.ICommandSequencer;
+import fr.aleclerc.windpath.gpx.Gpx;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 import org.slf4j.Logger;
@@ -12,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import reactor.adapter.rxjava.RxJava2Adapter;
-import reactor.core.publisher.Flux;
 
 import java.time.Instant;
 import java.util.List;
@@ -32,10 +31,11 @@ public class CreatePathFromGPXService {
     }
 
 
-    @PostMapping(value = "/service/gpx", consumes = "application/xml", produces = "application/xml")
-    public Completable createPath(@RequestBody Gpx gpx) {
+    @PostMapping(value = "/service/gpx", consumes = "application/xml", produces = "application/json")
+    public Observable<UUID> createPath(@RequestBody Gpx gpx) {
         return this.createTrackCommand(gpx)//
-                .flatMapCompletable(commandSequencer::publish);
+                .flatMapSingle( cmd -> commandSequencer.publish(cmd).toSingleDefault(cmd))
+                .map(ACommand::getId);
     }
 
 

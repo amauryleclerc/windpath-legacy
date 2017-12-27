@@ -5,9 +5,10 @@ import fr.aleclerc.windpath.backend.event.CreatedTrackEvent;
 import fr.aleclerc.windpath.backend.event.CurrentTrackEvent;
 import fr.aleclerc.windpath.backend.pojo.Track;
 import fr.aleclerc.windpath.backend.service.CreatePathFromGPXService;
-import fr.aleclerc.windpath.backend.util.DispatcherUtils;
-import fr.aleclerc.windpath.backend.util.RxUtils;
+import fr.aleclerc.windpath.cqrs.dispatcher.Dispatcher;
+import fr.aleclerc.windpath.cqrs.dispatcher.EventHandler;
 import fr.aleclerc.windpath.cqrs.event.IEventSource;
+import fr.aleclerc.windpath.toolkit.rx.RxUtils;
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
 import io.reactivex.subjects.Subject;
@@ -29,17 +30,17 @@ public class TrackProjection implements ITrackEventStream {
     public TrackProjection(final IEventSource eventSource) {
 
         eventSource.getEvents()//
-                .flatMapCompletable(evt -> DispatcherUtils.dispatcheToHandler(this, evt))//
+                .flatMapCompletable(evt -> Dispatcher.dispatchToHandler(this, evt))//
                 .subscribe(RxUtils.nothingToDoOnComplete(), RxUtils.logError(LOGGER));
 
     }
 
-
+    @EventHandler
     public void handle(CreatedTrackEvent event) {
         System.err.println("PROJ");
         System.err.println(event);
         Track track = new Track(event.getId(), event.getName(), event.getPoints());
-        trackMap.put(event.getId(),track);
+        trackMap.put(event.getId(), track);
         eventSubject.onNext(event);
     }
 

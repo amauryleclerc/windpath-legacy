@@ -1,4 +1,4 @@
-package fr.aleclerc.windpath.backend.util;
+package fr.aleclerc.windpath.toolkit.rx;
 
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;

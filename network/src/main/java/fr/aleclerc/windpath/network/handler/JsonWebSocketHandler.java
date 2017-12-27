@@ -1,9 +1,8 @@
-package fr.aleclerc.windpath.backend.handler;
+package fr.aleclerc.windpath.network.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
-import fr.aleclerc.windpath.backend.service.CreatePathFromGPXService;
-import fr.aleclerc.windpath.backend.util.RxUtils;
+import fr.aleclerc.windpath.toolkit.rx.RxUtils;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import org.slf4j.Logger;
@@ -17,7 +16,7 @@ import java.util.function.Supplier;
 
 public class JsonWebSocketHandler<T> implements WebSocketHandler {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(CreatePathFromGPXService.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(JsonWebSocketHandler.class);
     private final Supplier<Observable<T>> streamSupplier;
     private final ObjectMapper mapper;
 
@@ -32,7 +31,7 @@ public class JsonWebSocketHandler<T> implements WebSocketHandler {
 
     @Override
     public void afterConnectionEstablished(WebSocketSession webSocketSession) throws Exception {
-        LOGGER.info("new webwork session {} - {}", webSocketSession.getId(), webSocketSession.getPrincipal());
+        LOGGER.info("New webwork session {} - {}", webSocketSession.getId(), webSocketSession.getPrincipal());
         Disposable sub = streamSupplier.get()
                 .map(mapper::writeValueAsString)//
                 .map(TextMessage::new)//
