@@ -1,5 +1,6 @@
 target/
 !.mvn/wrapper/maven-wrapper.jar
+frontend/src/main/frontend/node/
 
 ### STS ###
 .apt_generated
@@ -19,6 +20,5 @@ target/
 nbproject/private/
 build/
 nbbuild/
-dist/
 nbdist/
 .nb-gradle/

@@ -25,12 +25,12 @@ export class AppComponent {
   constructor(private httpClient: HttpClient, private websocketService: WebsocketService) {
     let configs = new Map<string, string>();
     configs.values()
-    this.httpClient.get<any>("http://localhost:4200/user").subscribe(v => {
+    this.httpClient.get<any>(this.getBaseUri()+"/user").subscribe(v => {
       this.name = v.name;
       this.img = v.picture;
     }, e => console.error(e));
 
-    websocketService.connect("ws://localhost:4200/track/projection")//
+    websocketService.connect(this.getWsBaseUri()+"/track/projection")//
     .map(msg => JSON.parse(msg.data))//
     .do(event => console.log(event))//
     .subscribe(v => this.processEvent(v), e => console.error(e));
@@ -48,12 +48,12 @@ export class AppComponent {
 
 
   test() {
-    this.httpClient.get("http://localhost:4200/test").subscribe(v => console.log(v), e => console.error(e));
+    this.httpClient.get(this.getBaseUri()+"/test").subscribe(v => console.log(v), e => console.error(e));
 
 
   }
   user() {
-    this.httpClient.get("http://localhost:4200/user").subscribe(v => console.log(v), e => console.error(e));
+    this.httpClient.get(this.getBaseUri()+"/user").subscribe(v => console.log(v), e => console.error(e));
   }
 
 
@@ -65,11 +65,24 @@ export class AppComponent {
     myReader.readAsText(file);
     Observable.fromEvent<any>(myReader, 'loadend')//
       .map(evt => myReader.result)//
-      .mergeMap(content => this.httpClient.post("http://localhost:4200/service/gpx", content, { headers: headers }))//
+      .mergeMap(content => this.httpClient.post(this.getBaseUri()+"/service/gpx", content, { headers: headers }))//
       .subscribe(v => console.log(v), e => console.error(e));
 
 
   }
+
+  private getWsBaseUri(): string{
+    let protocol = 'ws:';
+    if (window.location.protocol === 'https:') {
+      protocol = 'wss:';
+    }
+    return protocol + '//' + window.location.host;
+  }
+
+  private getBaseUri(): string{
+    return window.location.protocol + '//' + window.location.host;
+  }
+
 
   title = 'app';
 }

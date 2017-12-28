@@ -6,6 +6,7 @@
         <artifactId>windpath-parent</artifactId>
         <groupId>fr.aleclerc.windpath</groupId>
         <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
