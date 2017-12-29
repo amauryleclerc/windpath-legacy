@@ -13,3 +13,5 @@ logging:
   level:
     org.springframework.security: INFO
     org.springframework.web: DEBUG
+server:
+    port: ${PORT:8080}
