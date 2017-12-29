@@ -13,6 +13,11 @@ import { ToolkitService } from './services/toolkit.service';
 import { UserService } from './services/user.service';
 import { TracksService } from './services/tracks.service';
 import { WebsocketService } from './services/websocket.service';
+import { PlayerService } from './services/player.service';
+import { PlayerComponent } from './components/player/player.component';
+import { AddTrackComponent } from './components/add-track/add-track.component';
+import { TracksComponent } from './components/tracks/tracks.component';
+import { MapComponent } from './components/map/map.component';
 
 const appRoutes: Routes = [
   { path: 'viewer', component: ViewerComponent },
@@ -23,7 +28,11 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     MainComponent,
-    ViewerComponent
+    ViewerComponent,
+    PlayerComponent,
+    AddTrackComponent,
+    TracksComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +43,7 @@ const appRoutes: Routes = [
       apiKey: 'AIzaSyBfSkyDgkMtKi7tWDvcQ33kwas-lbLAE08'
  })
   ],
-  providers: [ToolkitService,UserService, TracksService, WebsocketService],
+  providers: [ToolkitService,UserService, TracksService, WebsocketService, PlayerService],
   bootstrap: [MainComponent]
 })
 export class AppModule { }

@@ -11,6 +11,7 @@ import 'rxjs/add/observable/fromEvent';
 import { WebsocketService } from './websocket.service';
 import { ToolkitService } from './toolkit.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Pt } from '../models/pt';
 @Injectable()
 export class TracksService {
 
@@ -58,12 +59,16 @@ export class TracksService {
 
   private processEvent(event: any) {
     if (event.type === "CreatedTrackEvent") {
-      this.tracks.set(event.id, new Track(event.id, event.name, event.points));
+      this.tracks.set(event.id, new Track(event.id, event.name, this.createPoints(event.points)));
       this.tracksSubject.next(this.tracks);
     } else if (event.type === "CurrentTrackEvent") {
-      this.tracks.set(event.id, new Track(event.track.id, event.track.name, event.track.points));
+      this.tracks.set(event.id, new Track(event.track.id, event.track.name, this.createPoints(event.track.points)));
       this.tracksSubject.next(this.tracks);
     }
+  }
+
+  private createPoints(points: Array<any>): Array<Pt>{
+    return points.map(p => new Pt(p.lat,p.lon, p.speed,p.ele));
   }
 
 

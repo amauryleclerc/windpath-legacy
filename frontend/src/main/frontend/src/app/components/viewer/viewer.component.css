@@ -1,3 +1,12 @@
 .map {
-    height: 94vh;
+  height: calc(100vh - 57px);
+}
+
+.panel {
+  margin-right: 1vw;
+  margin-top: 1vw;
+}
+
+.panel-element{
+  margin-bottom: 2px;
 }

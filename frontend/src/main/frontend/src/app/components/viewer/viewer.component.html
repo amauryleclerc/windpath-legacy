@@ -1,25 +1,10 @@
 <div class="row main">
-  <agm-map class="col-9 map" [latitude]="0" [longitude]="0" mapTypeControl="true">
-
-  </agm-map>
-  <div class="col-3 edit">
-    <h2>
-      Ajouter une trace :
-    </h2>
-    <form>
-      <label class="custom-file">
-        <input type="file" id="file" class="custom-file-input"  (change)="createTrackFromFile($event)" accept=".gpx" required>
-        <span class="custom-file-control"></span>
-      </label>
-    </form>
-    <h2>
-      Traces :
-    </h2>
-    <ul class="list-group" >
-      <li class="list-group-item" *ngFor="let track of tracks" >
-          {{track.name}}
-      </li>
-    </ul>
-
+  <app-map class="col-9"></app-map>
+  <div class="col-3">
+    <div class="panel">
+      <app-player class="panel-element"></app-player>
+      <app-add-track class="panel-element" ></app-add-track>
+      <app-tracks class="panel-element"></app-tracks>
+    </div>
   </div>
 </div>
