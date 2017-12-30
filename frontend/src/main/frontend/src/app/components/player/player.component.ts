@@ -13,6 +13,8 @@ export class PlayerComponent implements OnInit {
   hasTrack: Boolean = false;
   playerSpeed: Number = 1;
   speed: String;
+  knSpeed: number = 0;
+  rotate: String = "rotate(0deg)";
   constructor(private playerService: PlayerService, private tracksService: TracksService) { }
 
   ngOnInit() {
@@ -26,9 +28,10 @@ export class PlayerComponent implements OnInit {
       this.playerSpeed = 1000 / speed;
     });
     this.playerService.getPosition()//
-      .map(p => p.getSpeedLabel())//
-      .subscribe(s => {
-        this.speed = s;
+      .subscribe(p => {
+        this.speed = p.getSpeedLabel();
+        this.knSpeed = p.getKnotsSpeed();
+        this.rotate = "rotate("+this.knSpeed*6+"deg)"
       });
   }
 
