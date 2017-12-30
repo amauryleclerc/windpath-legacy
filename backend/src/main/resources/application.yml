@@ -7,8 +7,8 @@ spring:
       client:
         registration:
           google:
-            client-id: 275067037620-okntqnsqjlrq5ud3hv0ufq4bn8u461t7.apps.googleusercontent.com
-            client-secret: rUN6zZZxOYwx9dD3mTJzonpb
+            client-id: ${GOOGLE_ID}
+            client-secret: ${GOOGLE_SECRET}
 logging:
   level:
     org.springframework.security: INFO

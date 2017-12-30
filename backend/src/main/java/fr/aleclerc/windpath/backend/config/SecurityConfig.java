@@ -33,8 +33,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf()//
                 .disable()
-//                .exceptionHandling()//
-//                .authenticationEntryPoint(new Http403ForbiddenEntryPoint())//
+                .exceptionHandling()//
+                .authenticationEntryPoint(new Http403ForbiddenEntryPoint())//
 
         ;
 
