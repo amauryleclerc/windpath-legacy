@@ -1,5 +1,5 @@
 <agm-map class="map" [latitude]="center.lat" [longitude]="center.lon" mapTypeControl="true" [zoom]="zoom">
-    <agm-polyline *ngFor="let line of lines" [strokeColor]="line.color">
+    <agm-polyline *ngFor="let line of lines" [strokeColor]="line.color"  (lineClick)="onLineClick(line)" [polylineDraggable]="false" [clickable]="true">
       <agm-polyline-point [latitude]="line.ptA.lat" [longitude]="line.ptA.lon">
       </agm-polyline-point>
       <agm-polyline-point [latitude]="line.ptB.lat" [longitude]="line.ptB.lon">

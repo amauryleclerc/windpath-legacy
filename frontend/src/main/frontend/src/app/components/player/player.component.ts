@@ -38,6 +38,9 @@ export class PlayerComponent implements OnInit {
   play() {
     this.playerService.play();
   }
+  stop() {
+    this.playerService.stop();
+  }
   pause() {
     this.playerService.pause();
   }

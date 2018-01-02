@@ -3,6 +3,9 @@ import { Line } from '../../models/line';
 import { Pt } from '../../models/pt';
 import { TracksService } from '../../services/tracks.service';
 import { PlayerService } from '../../services/player.service';
+import { PolyMouseEvent } from '@agm/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LineModalComponent } from '../line-modal/line-modal.component';
 
 @Component({
   selector: 'app-map',
@@ -17,7 +20,7 @@ export class MapComponent implements OnInit {
   maxSpeed: Pt;
   windsurfer: Pt;
   icon: String;
-  constructor(private tracksService: TracksService, private playerService: PlayerService ) { }
+  constructor(private tracksService: TracksService, private playerService: PlayerService, private modalService: NgbModal ) { }
 
   ngOnInit() {
     this.tracksService.getSelectedTrack().subscribe(track => {
@@ -36,4 +39,9 @@ export class MapComponent implements OnInit {
     }, e => console.error(e));
   }
 
+  onLineClick(line: Line){
+    console.log(line);
+    const modalRef = this.modalService.open(LineModalComponent);
+    modalRef.componentInstance.line = line;
+  }
 }

@@ -20,6 +20,7 @@ import { TracksComponent } from './components/tracks/tracks.component';
 import { MapComponent } from './components/map/map.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { LineModalComponent } from './components/line-modal/line-modal.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -36,7 +37,8 @@ const appRoutes: Routes = [
     AddTrackComponent,
     TracksComponent,
     MapComponent,
-    LoginComponent
+    LoginComponent,
+    LineModalComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +56,7 @@ const appRoutes: Routes = [
     WebsocketService,
     PlayerService,
     AuthGuardService],
-  bootstrap: [MainComponent]
+  bootstrap: [MainComponent],
+  entryComponents:[LineModalComponent]
 })
 export class AppModule { }

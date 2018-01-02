@@ -1,0 +1,15 @@
+<div class="modal-header">
+  <h4 class="modal-title">Point</h4>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <p>Latitude : {{line.ptA.lat}}</p>
+  <p>Longitude : {{line.ptA.lon}}</p>
+  <p>Vitesse : {{line.ptA.getSpeedLabel()}}</p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-primary" (click)="play()">Jouer depuis ce point</button>
+  <button type="button" class="btn btn-outline-dark" (click)="close()">Close</button>
+</div>
