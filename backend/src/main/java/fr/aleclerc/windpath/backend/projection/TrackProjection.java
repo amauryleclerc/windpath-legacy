@@ -37,7 +37,7 @@ public class TrackProjection implements ITrackEventStream {
 
     @EventHandler
     public void handle(CreatedTrackEvent event) {
-        Track track = new Track(event.getId(), event.getName(), event.getPoints());
+        Track track = new Track(event.getId(), event.getName(), event.getPoints(), event.getUserId());
         trackMap.put(event.getId(), track);
         eventSubject.onNext(event);
     }

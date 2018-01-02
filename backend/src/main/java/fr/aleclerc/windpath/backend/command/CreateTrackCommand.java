@@ -11,8 +11,8 @@ public class CreateTrackCommand extends ACommand {
     private final String name;
     private final List<Point> points;
 
-    public CreateTrackCommand(final UUID id,final String name,final List<Point> points) {
-        super(id);
+    public CreateTrackCommand(final UUID id,final String name,final List<Point> points, final String userId) {
+        super(id, userId);
         this.name = name;
         this.points = points;
     }

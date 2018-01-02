@@ -15,6 +15,6 @@ public class CreateTrackCommandHandler implements ICommandHandler<CreateTrackCom
 
     @Override
     public Observable<IEvent> handle(CreateTrackCommand command) {
-        return Observable.fromCallable(() -> new CreatedTrackEvent(command.getId(), command.getName(), command.getPoints()));
+        return Observable.fromCallable(() -> new CreatedTrackEvent(command.getId(), command.getName(), command.getPoints(), command.getUserId()));
     }
 }

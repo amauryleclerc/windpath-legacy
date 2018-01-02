@@ -8,12 +8,14 @@ public class Track {
     private UUID id;
     private String name;
     private List<Point> points;
+    private String userId;
 
 
-    public Track(UUID id, String name, List<Point> points) {
+    public Track(UUID id, String name, List<Point> points, String userId) {
         this.id = id;
         this.name = name;
         this.points = points;
+        this.userId = userId;
     }
 
     public UUID getId() {
@@ -26,5 +28,9 @@ public class Track {
 
     public List<Point> getPoints() {
         return Collections.unmodifiableList(points);
+    }
+
+    public String getUserId() {
+        return userId;
     }
 }

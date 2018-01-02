@@ -10,6 +10,8 @@ import io.reactivex.Observable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,20 +36,20 @@ public class CreatePathFromGPXService {
 
 
     @PostMapping(value = "/service/gpx", consumes = "application/xml", produces = "application/json")
-    public Observable<UUID> createPath(@RequestBody Gpx gpx) {
-        return this.createTrackCommand(gpx)//
+    public Observable<UUID> createPath(@RequestBody Gpx gpx, @AuthenticationPrincipal OAuth2User user) {
+        return this.createTrackCommand(gpx, (String) user.getAttributes().get("sub"))//
                 .flatMapSingle( cmd -> commandSequencer.publish(cmd).toSingleDefault(cmd))
                 .map(ACommand::getId);
     }
 
 
-    private Observable<CreateTrackCommand> createTrackCommand(Gpx gpx) {
+    private Observable<CreateTrackCommand> createTrackCommand(Gpx gpx, String userId) {
         return Observable.fromIterable(gpx.getTrk())//
                 .flatMapSingle(trk -> Observable.fromIterable(trk.getTrkseg())//
                         .flatMap(trkSeg -> Observable.fromIterable(trkSeg.getTrkpt())//
                                 .map(this::convert))
                         .toList()//
-                        .map(points -> convert(trk, points))
+                        .map(points -> convert(trk, points, userId))
                 );//
     }
 
@@ -61,10 +63,10 @@ public class CreatePathFromGPXService {
 
     }
 
-    private CreateTrackCommand convert(Gpx.Trk trk, List<Point> points) {
+    private CreateTrackCommand convert(Gpx.Trk trk, List<Point> points, String userId) {
         UUID id = UUID.randomUUID();
         String name = trk.getName();
-        return new CreateTrackCommand(id, name, points);
+        return new CreateTrackCommand(id, name, points,userId);
     }
 
 }

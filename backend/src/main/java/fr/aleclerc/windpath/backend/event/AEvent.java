@@ -7,14 +7,19 @@ import java.util.UUID;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 public class AEvent implements IEvent {
-    private UUID id;
+    private final UUID id;
+    private final String userId;
 
-    protected AEvent(final UUID idTrack){
+    protected AEvent(final UUID idTrack,  final String userId){
         this.id = idTrack;
+        this.userId = userId;
     }
 
     public UUID getId() {
         return id;
     }
 
+    public String getUserId() {
+        return userId;
+    }
 }

@@ -10,8 +10,8 @@ public class CreatedTrackEvent extends AEvent {
     private final String name;
     private final List<Point> points;
 
-    public CreatedTrackEvent(final UUID id, final String name, final List<Point> points) {
-        super(id);
+    public CreatedTrackEvent(final UUID id, final String name, final List<Point> points, final String userId) {
+        super(id,userId);
         this.name = name;
         this.points = points;
     }
