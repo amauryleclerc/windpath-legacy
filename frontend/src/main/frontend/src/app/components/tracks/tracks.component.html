@@ -1,10 +1,15 @@
-<div class="card" *ngIf="tracks.length != 0" >
-    <div class="card-body">
-      <h5 class="card-title">Traces</h5>
-      <ul class="list-group">
-        <button class="list-group-item list-group-item-action" [ngClass]="{'active': track.id===selectedTrackId}" *ngFor="let track of tracks" (click)="selectTrack(track)">
-          {{track.name}}
-        </button>
-      </ul>
-    </div>
+<div class="card" *ngIf="tracks.length != 0">
+  <div class="card-body">
+    <h5 class="card-title">Traces</h5>
+    <ul class="list-group">
+      <button class="list-group-item list-group-item-action" [ngClass]="{'active': track.id===selectedTrackId}" *ngFor="let track of tracks"
+        (click)="selectTrack(track)">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{track.name}}</h5>
+          <small>{{track.length}}km</small>
+        </div>
+        <small>Vmax : {{track.maxSpeed.getSpeedLabel()}}</small>
+      </button>
+    </ul>
   </div>
+</div>
